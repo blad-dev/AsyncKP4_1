@@ -5,9 +5,7 @@ import java.util.function.Consumer;
 
 public class Main {
     public static Consumer<int[]> curryPrintArray(String note) {
-        return (int[] array) -> {
-            printArray(note, array);
-        };
+        return (int[] array) -> printArray(note, array);
     }
 
     private static void printArray(String note, int[] array) {
@@ -36,9 +34,7 @@ public class Main {
         })).thenAcceptAsync(Util.noteTimeTaken("Виведено суму початкового масиву", sum -> {
             System.out.printf("Сума початкового масиву: %d\n", sum);
         })).thenRunAsync(Util.noteTimeTaken("Виведено повідомлення про закінчення дій з початковим масивом",
-                () -> {
-                    System.out.println("Завершено усі операції з початковим масивом");
-                }
+                () -> System.out.println("Завершено усі операції з початковим масивом")
         )));
 
         CompletableFuture<int[]> modifiedNumbers = numbers.thenApplyAsync(Util.noteTimeTaken("Додано 5 до кожного елемента масива", _numbers -> {
@@ -73,9 +69,7 @@ public class Main {
             System.out.println("Факторіал суми модифікованого масиву: " + factorial.toString());
         })).thenRunAsync(
                 Util.noteTimeTaken("Виведено повідомлення про закінчення дій з модифікованим масивом",
-                        () -> {
-                            System.out.println("Завершено усі операції з модифікованим масивом");
-                        }
+                        () -> System.out.println("Завершено усі операції з модифікованим масивом")
                 )));
 
         joiner.joinAll();
